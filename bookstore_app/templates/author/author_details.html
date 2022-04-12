@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block page_content %}
+        <style>
+    img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+    </style>
+
+        <!-- Details Page -->
+    <section style="padding-bottom: 210px; padding-top: 27px; text-align: center">
+        <div >
+                <h2>{{ author.full_name}}</h2>
+                <p><img src="{{ author.image_url }}" alt=""></p>
+        </div>
+            {% if author.description %}
+                <div class="book-description">
+            <h3>Description:</h3>
+                <p>{{ author.description }}</p>
+                </div>
+            {% endif %}
+
+                {% if request.user.is_authenticated %}
+                <div>
+                <a class="button" href="{% url 'author edit' author.pk %}">Edit</a>
+                <a class="button" href="{% url 'author delete' author.pk %}">Delete</a>
+                    </div>
+                {% endif %}
+            </div>
+
+        </section>
+
+{% endblock %}

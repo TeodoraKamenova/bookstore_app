@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <body>
+
+        <section style="padding-bottom: 60px; padding-top: 10px">
+        <form method="post" action="{% url 'book delete' book.pk %}">
+            <fieldset>
+                <legend><h3>Delete Book</h3></legend>
+                {% csrf_token %}
+                {% for field in form %}
+                    <label>
+                        <div>
+                            {{ field.label_tag }} <br>
+                            {{ field }}
+                        </div>
+                    </label>
+                        {% endfor %}
+                <input class="button submit" type="submit" value="Delete">
+            </fieldset>
+        </form>
+    </section>
+    </body>
+{% endblock %}

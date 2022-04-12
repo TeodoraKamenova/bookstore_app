@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <body>
+
+    <section id="create-page" class="create">
+        <form id="create-form" style="text-align: center">
+            <fieldset>
+                <h4>Your profile has been deleted</h4>
+                <!-- Login Button -->
+                <a class="button" href="{% url 'login user' %}">Login</a>
+                <!-- Register Button -->
+                <a class="button" href="{% url 'register' %}">Register</a>
+            </fieldset>
+        </form>
+    </section>
+    </body>
+{% endblock %}

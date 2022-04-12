@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <style>
+    img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+    </style>
+        <!-- Profile Page -->
+        <section style="padding-bottom: 50px; padding-top: 32px">
+        <form style="text-align: center">
+        <fieldset>
+            <div>
+                <h3>{{ profile.full_name}}</h3>
+                {% if profile.date_of_birth %}
+                <p>Age: {{ profile.age}}</p>
+                {% endif %}
+                <p>Gender: {{ profile.gender }}</p>
+                <p><img src="{{ profile.image_URL }}" alt=""></p>
+                <div>
+                    <a href="{% url 'change password'%}">Change password</a>
+                    <a href="{% url 'profile edit' profile.pk %}">Edit</a>
+                    <a href="{% url 'profile delete' profile.pk %}">Delete</a>
+                </div>
+            </div>
+        </form>
+        </fieldset>
+        </section>
+
+{% endblock %}

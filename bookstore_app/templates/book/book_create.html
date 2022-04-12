@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+    <!-- Add Book Page -->
+    <section style="padding-bottom: 85px; padding-top: 25px">
+        <form action="{% url 'book add' %}" method="post">
+            <fieldset>
+                <legend><h3>Add New Book</h3></legend>
+                {% csrf_token %}
+                {% for field in form %}
+                    <label>
+                        <div>
+                            {{ field.label_tag }} <br>
+                            {{ field }}
+                        </div>
+                    </label>
+                        {% endfor %}
+                <input class="button submit" type="submit" value="Add Book">
+            </fieldset>
+        </form>
+    </section>
+
+{% endblock %}

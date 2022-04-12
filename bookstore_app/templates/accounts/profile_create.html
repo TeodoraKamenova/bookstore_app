@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+
+    <section>
+        <form action="{% url 'register' %}" method="post">
+            <fieldset>
+                <legend><h2>Create Your Profile</h2></legend>
+                {% csrf_token %}
+                {% for field in form %}
+                    <label>
+                        <div>
+                            {{ field.label_tag }} <br>
+                            {{ field }}
+                        </div>
+                        {% if field.help_text %}
+                            <div>
+                                <small style="color: grey">{{ field.help_text }}</small>
+                            </div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+
+                    </label>
+                {% endfor %}
+                <button type="submit" class="registerbtn" value>Sign up</button>
+            </fieldset>
+        </form>
+
+    </section>
+
+{% endblock %}

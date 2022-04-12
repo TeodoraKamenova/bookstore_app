@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Float four columns side by side */
+        .column {
+            float: left;
+            width: 25%;
+            padding: 0 10px;
+        }
+
+        /* Remove extra left and right margins, due to padding in columns */
+        .row {
+            margin: 0 -5px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 300px;
+            height: 500px;
+            padding: 16px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .span {
+            padding-left: 35rem;
+            font-weight: bold;
+            font-size: 150%;
+            padding-bottom: 3rem;
+            display: inline-block;
+        }
+
+    </style>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <h2>
+                    <li
+                            {% if message.tags %}
+                        class=" {{ message.tags }} "
+                            {% endif %}>
+                        {{ message }} </li>
+                </h2>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Dashboard Page-->
+    <section>
+        <h1>Dashboard</h1>
+        {% if not books %}
+            <!-- Display paragraph: If the user doesn't have any books  -->
+            <p>No books in database!</p>
+            <!-- Display ul: with list-items for every books if any -->
+        {% else %}
+            <div class="row">
+                {% for book in books %}
+                    <div class="column">
+                        <div class="card">
+                            <h3>{{ book.title }}</h3>
+                            <p>Category: {{ book.category }}</p>
+                            <p><img src="{{ book.image_URL }}" alt="Book image" style="width:200px; height: 300px"></p>
+                            <a href="{% url 'book details' book.pk %}">Details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <!-- Pagination -->
+        <span class="span">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+            <span>
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+    </span>
+    </section>
+
+{% endblock %}

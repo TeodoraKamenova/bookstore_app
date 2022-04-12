@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon"
+          href="https://static.vecteezy.com/system/resources/thumbnails/002/219/582/small/illustration-of-book-icon-free-vector.jpg">
+    <style>
+        body {
+            background-image: url("https://wallpapercave.com/wp/wp8053601.jpg");
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #D1B9B1;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 17px;
+            margin: 3px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            {#background-color: #B4A19A ;#}
+            text-decoration: underline;
+
+        }
+
+        p {
+            color: black;
+            margin-right: 15px;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            background: #D1B9B1;
+        }
+
+        footer p {
+            padding: 1rem 0;
+            margin: 0;
+            color: black;
+        }
+    </style>
+
+    <title>Bookstore</title>
+</head>
+
+<body>
+{#<div id="container">#}
+<header>
+    <!-- Navigation -->
+    <nav>
+        {% if request.user.is_authenticated %}
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li style="float: right; font-weight:bold;"><a id="grey" href="{% url 'logout user' %}">Log Out</a></li>
+                <li style="float: right"><a href="{% url 'profile details' request.user.id %}">Profile</a></li>
+                <li style="float: right"><a href="{% url 'book add' %}">Add Book</a></li>
+                <li style="float: right"><a href="{% url 'author add' %}">Add Author</a></li>
+                <li style="float: right"><p><b>Welcome, {{ request.user.username }}</b></p></li>
+
+            </ul>
+        {% else %}
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li style="float: right"><a id="grey" class="button" href="{% url 'login user' %}">Log In</a></li>
+                <li style="float: right"><a id="grey" class="button" href="{% url 'register' %}">Register</a></li>
+            </ul>
+        {% endif %}
+    </nav>
+</header>
+
+{% block page_content %}
+{% endblock %}
+
+<footer id="site-footer">
+    <p>Python Web Framework PROJECT DEFENCE April 2022 @SoftUni by Teodora Kamenova</p>
+</footer>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <!-- Add Book Page -->
+    <section style="padding-bottom: 160px; padding-top: 28px;>
+        <form action="" method="post">
+            <fieldset>
+                <legend><h3>Edit Comment</h3></legend>
+                {% csrf_token %}
+                {% for field in form %}
+                    <label>
+                        <div>
+                            {{ field.label_tag }} <br>
+                            {{ field }}
+                        </div>
+                    </label>
+                        {% endfor %}
+                <input class="button submit" type="submit" value="Edit Comment">
+            </fieldset>
+        </form>
+    </section>
+
+{% endblock %}

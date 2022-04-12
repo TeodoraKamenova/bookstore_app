@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <style>
+    img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+    </style>
+
+    <!-- Details Page -->
+    <section>
+    <form style="text-align: center">
+        <fieldset>
+            <h2>{{ book.title }}</h2>
+            <h4>{{ book.author }}</h4>
+                <a href="{% url 'author details' book.author.pk %}">Author Details</a>
+            <p class="type">Category: {{ book.category }}</p> <br>
+            <p class="img-details"><img src="{{ object.image_URL }}" alt=""></p>
+            {% if request.user.is_authenticated %}
+                <a class="button" href="{% url 'book edit' book.pk %}">Edit</a>
+                <a class="button" href="{% url 'book delete' book.pk %}">Delete</a>
+            {% endif %}
+
+        <div style="text-align: left">
+            <h3>Description:</h3>
+            <p>{{ object.description }}</p>
+        </div>
+        </fieldset>
+</form>
+    </section> <br>
+    <!-- List of comments -->
+    <section>
+    <label>
+        {% if comments %}
+            <h3 style="text-align: center">Comments:</h3>
+            {% for comment in comments %}
+                <section>
+                    <div>
+                        <fieldset>
+                            <div style="text-align: center">
+                                <h3>{{ comment }}</h3>
+                                <p>{{ comment.comment }}</p>
+                            <div>
+                                {% if comment.user == request.user %}
+                                    <a class="button" href="{% url 'comment edit' comment.pk %}">Edit</a>
+                                    <a class="button" href="#">Delete</a>
+                                {% endif %}
+                            </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </label>
+                </section>
+            {% endfor %}
+
+        {% else %}
+            <label>
+            <div>
+            <div>
+                <div>
+                    <div>
+                        <h3 style="text-align: center">No comments yet.</h3>
+                    </div>
+                </div>
+            </div>
+            </label>
+        {% endif %}
+    </section>
+    <!-- End List of comments -->
+    <div><h3 style="text-align: center">Leave your comment</h3></div>
+    <!-- Comment box -->
+    <section>
+        <div>
+            {% if user.is_authenticated %}
+                <form method="POST" style="text-align: center">
+                    {% csrf_token %}
+                    {% for field in comment_form %}
+                    <div>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                <input class="button submit" type="submit" value="Add comment">
+                </form>
+            {% else %}
+                <a class="btn btn-outline-info" href="{% url 'login user' %}?next={{ request.path }}">Log in to add a
+                    comment!</a><br>
+            {% endif %}
+
+        </div>
+    </section>
+
+{% endblock %}

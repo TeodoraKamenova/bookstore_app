@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+    <!-- Edit Book Page -->
+    <section style="padding-bottom: 85px; padding-top: 26px">
+        <form action="{% url 'book edit' book.pk %}" method="post">
+            <fieldset>
+                <legend><h3>Edit Book</h3></legend>
+                {% csrf_token %}
+                {% for field in form %}
+                    <label>
+                        <div>
+                            {{ field.label_tag }} <br>
+                            {{ field }}
+                        </div>
+                    </label>
+                        {% endfor %}
+                <input class="button submit" type="submit" value="Edit">
+            </fieldset>
+        </form>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+    <body>
+    <section id="create-page" class="create">
+        <form id="create-form" action="#" method="post" style="text-align: center">
+            <fieldset>
+
+                <h4>You are logged out. </h4>
+                <p><a href="{% url 'login user' %}">Log in</a> again</p>
+                <p>or return to<a href="{% url 'home page' %}"> Home page</a></p>
+            </fieldset>
+        </form>
+    </section>
+    </body>
+{% endblock %}

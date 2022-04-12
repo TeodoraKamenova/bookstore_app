@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+            <!-- Login Form -->
+            <section style="padding-bottom: 300px; padding-top: 19px">
+                <form method="post" action="{% url 'login user' %}">
+                    <fieldset>
+                        <legend><h2>Login to Your Profile</h2></legend>
+                        {% csrf_token %}
+                        {% for field in form %}
+                    <label>
+                        <div>
+                            {{ field.label_tag }} <br>
+                            {{ field }}
+                        </div>
+                    </label>
+                        {% endfor %}
+                        <input type="submit" value="Log in">
+                    </fieldset>
+                </form>
+            </section>
+            <!-- End Login Form -->
+
+{% endblock %}
